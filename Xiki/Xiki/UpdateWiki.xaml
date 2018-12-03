@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xiki.UpdateWiki">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Edit your wiki" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="entryName"/>
+            <Editor x:Name="editorDescription"/>
+            <Button Text="Spara" Clicked="Save_Button"></Button>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
