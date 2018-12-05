@@ -31,7 +31,7 @@ namespace Xiki
             string password
         )
         {
-
+            var host = Application.Current.Resources["Host"];
             try
             {
                 JObject response = await HttpUtil.PostAsync("~theprovider/generate-token.php", new { username = username, password = password });

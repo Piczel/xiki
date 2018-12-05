@@ -12,6 +12,8 @@
             <Entry x:Name="entryUsername" Placeholder="Lösenord" IsPassword="True" />
             <Button Text="Logga in" Clicked="Signin_Button"></Button>
 
+            <Image Source="https://xamarin.com/content/images/pages/forms/example-app.png"></Image>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

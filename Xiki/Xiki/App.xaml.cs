@@ -1,17 +1,22 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xiki.Article;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Xiki
 {
     public partial class App : Application
     {
+
+        public static string Host = "http://10.130.216.144";
+
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Home());
+            MainPage = new ArticlePage();
         }
 
         protected override void OnStart()

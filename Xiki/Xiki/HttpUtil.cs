@@ -14,7 +14,7 @@ namespace Xiki
         public static async Task<JObject> PostAsync(string uri, object data)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://10.130.216.144"); // 10.130.216.144
+            client.BaseAddress = new Uri(App.Host); // 10.130.216.144
             string json = JsonConvert.SerializeObject(data);
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
