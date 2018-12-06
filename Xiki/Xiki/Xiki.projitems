@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Article\Anchor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Article\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -46,8 +47,5 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Article\nördigt.png" />
   </ItemGroup>
 </Project>
