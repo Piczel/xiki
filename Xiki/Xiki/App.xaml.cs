@@ -21,7 +21,8 @@ namespace Xiki
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new ArticlePage(17));
+            MainPage = new NavigationPage (new Home());
+           
         }
 
         protected override void OnStart()

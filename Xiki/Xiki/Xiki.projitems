@@ -16,6 +16,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Article\Anchor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ArticleLinkItem.xaml.cs">
+      <DependentUpon>ArticleLinkItem.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ClickableCustomView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Article\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -25,6 +30,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)HttpUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NewPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateWiki.xaml.cs">
       <DependentUpon>UpdateWiki.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -43,6 +49,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArticleLinkItem.xaml">
+     <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Article\ArticlePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
