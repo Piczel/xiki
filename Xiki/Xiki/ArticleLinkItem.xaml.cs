@@ -36,7 +36,7 @@ namespace Xiki
 
         private async void Clicked()
         {
-            await Navigation.PushAsync(new ArticlePage());
+            await Navigation.PushAsync(new ArticlePage(articleID));
         }
     }
 }

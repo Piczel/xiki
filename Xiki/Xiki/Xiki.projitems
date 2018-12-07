@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Article\Anchor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ArticleLinkItem.xaml.cs">
       <DependentUpon>ArticleLinkItem.xaml</DependentUpon>
       <SubType>Code</SubType>

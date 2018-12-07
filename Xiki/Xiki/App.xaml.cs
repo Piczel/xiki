@@ -10,7 +10,8 @@ namespace Xiki
     public partial class App : Application
     {
 
-        public static string Host = "http://10.130.216.144";
+        public static string    Host    = "http://10.130.216.144";
+        public static int       WikiID  = 6;
 
         public static List<ContentPage> History = new List<ContentPage>();
 
@@ -29,6 +30,10 @@ namespace Xiki
             HistoryIndex--;
             Nav.PushModalAsync(History[HistoryIndex]);
         }
+
+        public static string PATH_TP = "~theprovider/";
+        public static string PATH_WIKI = PATH_TP +"wiki/php/";
+        public static string GET_ARTICLES = PATH_WIKI +"get-articles.php";
 
         public App()
         {
@@ -52,6 +57,14 @@ namespace Xiki
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+
+        public static async void PushArticleAsync(ArticlePage page)
+        {
+            
+            await page.Navigation.PushAsync(page);
+
         }
     }
 }
