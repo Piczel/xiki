@@ -209,11 +209,8 @@ namespace Xiki.Article
 
             ArticleElements.Children.Add(image);
 
-            Label text = new Label
-            {
-                Style = Resources["ImageP"] as Style,
-                Text = (string)i["text"]
-            };
+            Label text = ParseParagraphLabel((string)i["text"]);
+            text.Style = Resources["ImageP"] as Style;
 
             ArticleElements.Children.Add(text);
         }

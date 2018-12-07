@@ -13,23 +13,6 @@ namespace Xiki
         public static string    Host    = "http://10.130.216.144";
         public static int       WikiID  = 6;
 
-        public static List<ContentPage> History = new List<ContentPage>();
-
-        private static int HistoryIndex = 0;
-        
-        private static INavigation Nav = null; 
-
-        public static void Forward()
-        {
-            HistoryIndex++;
-            Nav.PushModalAsync(History[HistoryIndex]);
-        }
-
-        public static void Backward()
-        {
-            HistoryIndex--;
-            Nav.PushModalAsync(History[HistoryIndex]);
-        }
 
         public static string PATH_TP = "~theprovider/";
         public static string PATH_WIKI = PATH_TP +"wiki/php/";
@@ -39,8 +22,7 @@ namespace Xiki
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage (new Home());
-            Nav = MainPage.Navigation; 
+            MainPage = new NavigationPage (new Find());
            
         }
 

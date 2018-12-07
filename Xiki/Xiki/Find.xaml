@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xiki.Find"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <FlexLayout AlignItems="Center">
+                <Entry x:Name="Search" WidthRequest="10000" FlexLayout.Shrink="1"/>
+                <Button Clicked="SearchAsync" Text="Q" WidthRequest="45" FlexLayout.Shrink="0"/>
+            </FlexLayout>
+            <ScrollView>
+                <StackLayout x:Name="Articles" VerticalOptions="Fill" HorizontalOptions="Fill">
+                    <Label Text="Search for articles" HorizontalTextAlignment="Center" />
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

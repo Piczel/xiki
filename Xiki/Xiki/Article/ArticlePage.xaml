@@ -31,7 +31,6 @@
                 <Setter Property="TextColor" Value="Black" />
             </Style>
             <Style x:Key="Anchor" TargetType="Span">
-                <Setter Property="FontSize" Value="12" />
                 <Setter Property="TextColor" Value="Blue" />
                 <Setter Property="TextDecorations" Value="Underline" />
             </Style>
