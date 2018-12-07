@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xiki.Article;
 
 namespace Xiki
 {
@@ -15,12 +16,14 @@ namespace Xiki
 
         private TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
 
-        public ArticleLinkItem(string title, string subtitle)
+        private int articleID;
+
+        public ArticleLinkItem(string title, string subtitle, int articleID)
         {
             InitializeComponent();
             tapGestureRecognizer.Tapped += (s, e) =>
             {
-                System.Diagnostics.Debug.WriteLine("Image Clicked w/ Lambda");
+                System.Diagnostics.Debug.WriteLine("lmao");
                 Clicked();
 
             };
@@ -28,11 +31,12 @@ namespace Xiki
             GestureRecognizers.Add(tapGestureRecognizer);
             LabelTitle.Text = title;
             LabelSubTitle.Text = subtitle;
+            this.articleID = articleID; 
         }
 
         private async void Clicked()
         {
-            await Navigation.PushAsync(new NewPage());
+            await Navigation.PushAsync(new ArticlePage());
         }
     }
 }

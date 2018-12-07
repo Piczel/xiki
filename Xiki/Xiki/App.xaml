@@ -5,6 +5,9 @@
              NavigationPage.HasNavigationBar="False">
     <Application.Resources>
 
+        
+  
+        
         <ResourceDictionary>
 
         </ResourceDictionary>

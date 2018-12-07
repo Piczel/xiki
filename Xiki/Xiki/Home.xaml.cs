@@ -20,15 +20,25 @@ namespace Xiki
             for (int i = 0; i < 5; i++)
             {
 
-                var Article = new ArticleLinkItem("Article"+i,"Subtitlehehhe");
+                var Article = new ArticleLinkItem("Article"+i,"Subtitlehehhe", 0);
             
                 Articles.Children.Add(Article);
                         
             }
 
         }
+        private async void GetArticles()
+        {
+            JObject Response = await HttpUtil.PostAsync("~theprovider/wiki/php/get-articles.php", new
+            {
+                wikiID = 6
+            });
+        }
 
+        public async void SearchAsync(object sender, EventArgs e)
+        {
 
+        }
     }
 
 

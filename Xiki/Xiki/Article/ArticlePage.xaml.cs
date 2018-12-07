@@ -16,5 +16,6 @@ namespace Xiki.Article
 		{
 			InitializeComponent ();
 		}
+
 	}
 }
