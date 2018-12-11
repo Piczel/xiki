@@ -13,15 +13,23 @@ namespace Xiki
 
         public static async Task<JObject> PostAsync(string uri, object data)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://10.130.216.144"); // 10.130.216.144
-            string json = JsonConvert.SerializeObject(data);
+            string responseJSON = "";
+            try
+            {
 
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage result = await client.PostAsync(uri, content);
-            string responseJSON = await result.Content.ReadAsStringAsync();
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(App.Host); // 10.130.216.144
+                string json = JsonConvert.SerializeObject(data);
 
-            return JObject.Parse(responseJSON);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage result = await client.PostAsync(uri, content);
+                responseJSON = await result.Content.ReadAsStringAsync();
+
+                return JObject.Parse(responseJSON);
+            } catch(JsonReaderException exc)
+            {
+                throw new Exception("Error parsing request: " + uri + " | " + responseJSON);
+            }
         }
     }
 

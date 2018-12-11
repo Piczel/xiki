@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Xiki.Home">
+             x:Class="Xiki.Home"
+             NavigationPage.HasNavigationBar="False" >
     <ContentPage.Content>
+
         <StackLayout>
+            <FlexLayout>
+                <Entry x:Name="Search"> </Entry>
+                <Button Clicked="SearchAsync"> </Button>
+            </FlexLayout>
+            <ScrollView>
 
+                <StackLayout x:Name="Articles" BackgroundColor="WhiteSmoke" VerticalOptions="Fill" HorizontalOptions="Fill">
+                    <Label x:Name="pageTitle" Text="Hello, this is the title" />
+                </StackLayout>
 
-            <Label Text="Logga in i Xiki" HorizontalOptions="Center"></Label>
-
-            <Entry x:Name="entryPassword" Placeholder="Användarnamn" />
-            <Entry x:Name="entryUsername" Placeholder="Lösenord" IsPassword="True" />
-            <Button Text="Logga in" Clicked="Signin_Button"></Button>
+            </ScrollView>
 
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

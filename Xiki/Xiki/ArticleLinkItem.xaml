@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xiki.ArticleLinkItem">
+  <ContentView.Content>
+        <Frame BackgroundColor="Ivory"
+                   CornerRadius="10"
+                   Margin="16, 4">
+            <FlexLayout AlignItems="Center">
+                <BoxView BackgroundColor="Black" WidthRequest="50" HeightRequest="50"></BoxView>
+                <StackLayout Margin="8, 8, 8, 8" Spacing="0">
+                    <Label x:Name="LabelTitle" TextColor="Black" FontSize="15"></Label>
+                    <BoxView HeightRequest="0.2" BackgroundColor="Black"></BoxView>
+                    <Label x:Name="LabelSubTitle" TextColor="#464646" FontSize="11"></Label>
+                </StackLayout>
+            </FlexLayout>
+        </Frame>
+    </ContentView.Content> 
+</ContentView>
