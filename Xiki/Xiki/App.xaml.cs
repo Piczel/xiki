@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Plugin.Settings;
+using Plugin.Settings.Abstractions;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xiki.Article;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Xiki
@@ -10,19 +13,38 @@ namespace Xiki
     public partial class App : Application
     {
 
-        public static string    Host    = "http://10.130.216.144";
-        public static int       WikiID  = 6;
+        
+        public static readonly string PATH_TP = "~theprovider/";
+        public static readonly string PATH_WIKI = PATH_TP +"wiki/php/";
+        public static readonly string GET_ARTICLES = PATH_WIKI +"get-articles.php";
 
 
-        public static string PATH_TP = "~theprovider/";
-        public static string PATH_WIKI = PATH_TP +"wiki/php/";
-        public static string GET_ARTICLES = PATH_WIKI +"get-articles.php";
+        private static ISettings AppSettings => CrossSettings.Current;
+
+        public static string Host
+        {
+            get => AppSettings.GetValueOrDefault(nameof(Host), "http://10.130.216.144");
+            set => AppSettings.AddOrUpdateValue(nameof(Host), value);
+        }
+
+        public static int WikiID
+        {
+            get => AppSettings.GetValueOrDefault(nameof(WikiID), 6);
+            set => AppSettings.AddOrUpdateValue(nameof(WikiID), value);
+        }
+
+
+
+
+
+
+
 
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage (new Find());
+            MainPage = new NavigationPage (new ArticlePage(17));
            
         }
 

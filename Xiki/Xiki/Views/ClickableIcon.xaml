@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xiki.Views.ClickableIcon">
+    <ContentView.Content>
+        <StackLayout Spacing="0" Padding="10, 0, 10, 0">
+            <BoxView HeightRequest="34" WidthRequest="34" BackgroundColor="Gainsboro"/>
+            <Label x:Name="IconLabel" TextColor="#464646" FontSize="10" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

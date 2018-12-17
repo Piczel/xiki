@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xiki.Pages.PromptPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="Label" Text="Input" HorizontalTextAlignment="Center" FontSize="14" Margin="0, 20, 0, 0"/>
+            <FlexLayout>
+                <Entry x:Name="Input" FlexLayout.Shrink="1" WidthRequest="1000" Placeholder="Placeholder"/>
+                <Button FlexLayout.Shrink="0" WidthRequest="68" Text="Save" Clicked="ClickedAsync"/>
+            </FlexLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
