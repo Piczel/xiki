@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xiki.Views.OverlappingView"
+             xmlns:control="clr-namespace:Xiki.Views">
+    <ContentView.Content>
+        <AbsoluteLayout>
+            
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 48" AbsoluteLayout.LayoutFlags="WidthProportional">
+                <FlexLayout x:Name="Buttons" HeightRequest="48" JustifyContent="SpaceBetween"></FlexLayout>
+
+                <StackLayout x:Name="ContentViewport" Opacity="0" HeightRequest="200">
+
+                </StackLayout>
+
+            </StackLayout>
+        </AbsoluteLayout>
+  </ContentView.Content>
+</ContentView>
