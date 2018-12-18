@@ -20,9 +20,9 @@ namespace Xiki
             for (int i = 0; i < 5; i++)
             {
 
-                var Article = new ArticleLinkItem("Article"+i,"Subtitlehehhe", 0);
+                //var Article = new ArticleLinkItem("Article"+i,"Subtitlehehhe", 0);
             
-                Articles.Children.Add(Article);
+               // Articles.Children.Add(Article);
                         
             }
 

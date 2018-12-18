@@ -70,7 +70,7 @@ namespace Xiki.Article
                 
             }));
             buttons.Add(new ClickableIcon("Find", () => {
-                
+                Navigation.PushAsync(new Find(this));
             }));
             
             
