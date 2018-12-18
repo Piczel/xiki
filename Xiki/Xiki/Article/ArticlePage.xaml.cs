@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,22 +20,24 @@ namespace Xiki.Article
 			InitializeComponent();
             tabs = new TabView(this);
             (FindByName("HorizontalStack") as StackLayout).Children.Add(tabs);
-            setArticleView(new ArticleView(this, articleID));
-
+            setArticleView(articleID);
             // DisplayAlert("Message", "Page loaded, ID: " + ArticleID, "OK");
         }
-        public void setArticleView (ArticleView article)
-
+        public void setArticleView (int articleID)
         {
-            tabs.OpenTab(article);
-            (FindByName("ArticleViewport") as ScrollView).Content = article;
+
+            // Creates a new view and loads its content
+
+            (FindByName("ArticleViewport") as ScrollView).Content = tabs.OpenTab(articleID);
         }
         
-        public void setArticleView(ArticleView article, Tab tab)
-
+        public void setArticleView(Tab tab)
         {
-            tabs.OpenTab(article, tab);
-            (FindByName("ArticleViewport") as ScrollView).Content = article;
+            // Sets the view from clicked tab
+
+
+            tabs.SetActive(tab);
+            (FindByName("ArticleViewport") as ScrollView).Content = tab.GetArticleView();
         }
       
     }

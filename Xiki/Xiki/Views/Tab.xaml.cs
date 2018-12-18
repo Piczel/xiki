@@ -17,25 +17,36 @@ namespace Xiki.Views
 
 
         private ArticleView article;
+        
         private TabView tabView;
 
-        public Tab (string name, ArticleView article, TabView tabView)
+        public Tab (TabView tabView)
 		{
 			InitializeComponent ();
             tapGestureRecognizer.Tapped += (s, e) =>
             {
                  Clicked();
             };
-           
-            this.article = article;
 
             this.tabView = tabView; 
 
             GestureRecognizers.Add(tapGestureRecognizer);
 
-            (FindByName("TabName") as Label).Text = "Jessica Jones";
+            (FindByName("TabName") as Label).Text = "Untitled Tab";
+            BackgroundColor = Color.Gainsboro;
 
         }
+
+        public void SetArticleView(ArticleView article)
+        {
+            this.article = article;
+            (FindByName("TabName") as Label).Text = article.GetTitle();
+        }
+        public ArticleView GetArticleView()
+        {
+            return article;
+        }
+
 
         private void DeletusFetus(object sender, EventArgs e)
         {
@@ -57,14 +68,19 @@ namespace Xiki.Views
             }
         }
 
+        public void SetActive()
+        {
+            this.BackgroundColor = Color.White;
+        }
+
+        public void SetInactive()
+        {
+            this.BackgroundColor = Color.Gainsboro;
+        }
+
         private async void Clicked()
         {
             tabView.TabClicked(this);
-        }
-
-        public ArticleView GetArticleView ()
-        {
-            return article;            
         }
 
 
