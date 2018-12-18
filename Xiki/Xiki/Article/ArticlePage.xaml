@@ -9,33 +9,37 @@
       
     </ContentPage.Resources>
     <ContentPage.Content>
-        
-        <StackLayout Spacing="0" Orientation="Vertical">
+        <AbsoluteLayout>
 
-            <StackLayout x:Name="HorizontalStack"  Spacing="0" Orientation="Horizontal" VerticalOptions="FillAndExpand">
-                <StackLayout Spacing="0">
+            <StackLayout x:Name="HorizontalStack" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"  Spacing="0" Orientation="Vertical">
 
-                    <FlexLayout JustifyContent="SpaceBetween" HeightRequest="38" Direction="Row" BackgroundColor="#FFFFFF">
-                        <StackLayout Spacing="1" Orientation="Horizontal">
-                            <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
-                            <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
-                        </StackLayout>
-                        <StackLayout Spacing="1" Orientation="Horizontal">
-                            <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
-                            <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
-                        </StackLayout>
-                    </FlexLayout>
+                <StackLayout Spacing="0" Orientation="Horizontal" VerticalOptions="FillAndExpand">
+                    <StackLayout Spacing="0">
 
-                    <ScrollView x:Name="ArticleViewport" BackgroundColor="#FFFFFF" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <FlexLayout JustifyContent="SpaceBetween" HeightRequest="38" Direction="Row" BackgroundColor="#FFFFFF">
+                            <StackLayout Spacing="1" Orientation="Horizontal">
+                                <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
+                                <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
+                            </StackLayout>
+                            <StackLayout Spacing="1" Orientation="Horizontal">
+                                <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
+                                <BoxView HeightRequest="38" WidthRequest="38" BackgroundColor="Gainsboro"/>
+                            </StackLayout>
+                        </FlexLayout>
+
+                        <ScrollView x:Name="ArticleViewport" BackgroundColor="#FFFFFF" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         
-                    </ScrollView>
+                        </ScrollView>
 
+                    </StackLayout>
+                
                 </StackLayout>
+        
                 
             </StackLayout>
-        
-            <BoxView BackgroundColor="#F2F2F2" HorizontalOptions="FillAndExpand" HeightRequest="48"></BoxView>
 
-        </StackLayout>
+            <FlexLayout AbsoluteLayout.LayoutBounds="0, 1, 1, 48" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" x:Name="Buttons" HeightRequest="48" JustifyContent="SpaceBetween"></FlexLayout>
+
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
