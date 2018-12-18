@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Xiki.Views"
+             x:Class="Xiki.Views.TabView">
+  <ContentView.Content>
+
+        <ScrollView WidthRequest="16" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" BackgroundColor="Gray">
+            <StackLayout x:Name="TabStash" Spacing="2">
+              
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

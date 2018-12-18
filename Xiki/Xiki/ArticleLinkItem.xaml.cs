@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xiki.Article;
@@ -23,7 +22,7 @@ namespace Xiki
             InitializeComponent();
             tapGestureRecognizer.Tapped += (s, e) =>
             {
-                System.Diagnostics.Debug.WriteLine("lmao");
+                System.Diagnostics.Debug.WriteLine("Not working, lmao");
                 Clicked();
 
             };
