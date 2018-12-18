@@ -23,8 +23,7 @@ namespace Xiki.Article
             tabs = new TabView(this);
             (FindByName("HorizontalStack") as StackLayout).Children.Add(tabs);
             setArticleView(articleID);
-
-            this.ArticleID = articleID;
+            
 
             IList<View> buttons = (FindByName("Buttons") as FlexLayout).Children;
             buttons.Add(new ClickableIcon("Menu", () => {
@@ -73,10 +72,8 @@ namespace Xiki.Article
             buttons.Add(new ClickableIcon("Find", () => {
                 
             }));
-
-            ArticleElements = this.FindByName("ArticleContent") as StackLayout;
-
-            LoadArticleAsync();
+            
+            
 
             // DisplayAlert("Message", "Page loaded, ID: " + ArticleID, "OK");
         }

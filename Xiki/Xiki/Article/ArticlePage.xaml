@@ -11,9 +11,9 @@
     <ContentPage.Content>
         <AbsoluteLayout>
 
-            <StackLayout x:Name="HorizontalStack" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"  Spacing="0" Orientation="Vertical">
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"  Spacing="0" Orientation="Vertical">
 
-                <StackLayout Spacing="0" Orientation="Horizontal" VerticalOptions="FillAndExpand">
+                <StackLayout x:Name="HorizontalStack" Spacing="0" Orientation="Horizontal" VerticalOptions="FillAndExpand">
                     <StackLayout Spacing="0">
 
                         <FlexLayout JustifyContent="SpaceBetween" HeightRequest="38" Direction="Row" BackgroundColor="#FFFFFF">
@@ -28,14 +28,17 @@
                         </FlexLayout>
 
                         <ScrollView x:Name="ArticleViewport" BackgroundColor="#FFFFFF" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        
+
                         </ScrollView>
 
                     </StackLayout>
-                
+
+                    <!-- TabView is appended here -->
                 </StackLayout>
-        
-                
+
+                <BoxView HeightRequest="48" BackgroundColor="WhiteSmoke" />
+
+
             </StackLayout>
 
             <FlexLayout AbsoluteLayout.LayoutBounds="0, 1, 1, 48" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" x:Name="Buttons" HeightRequest="48" JustifyContent="SpaceBetween"></FlexLayout>
