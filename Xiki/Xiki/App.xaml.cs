@@ -44,7 +44,7 @@ namespace Xiki
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage (new ArticlePage(17));
+            MainPage = new NavigationPage (ArticlePage.GetInstance());
            
         }
 

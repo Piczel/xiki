@@ -16,9 +16,8 @@ namespace Xiki
         private TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
 
         private int articleID;
-        private ArticlePage page;
 
-        public ArticleLinkItem(ArticlePage page, string title, string subtitle, int articleID)
+        public ArticleLinkItem(string title, string subtitle, int articleID)
         {
             InitializeComponent();
             tapGestureRecognizer.Tapped += (s, e) =>
@@ -28,7 +27,6 @@ namespace Xiki
             };
 
             GestureRecognizers.Add(tapGestureRecognizer);
-            this.page = page;
             LabelTitle.Text = title;
             LabelSubTitle.Text = subtitle;
             this.articleID = articleID; 
@@ -36,7 +34,7 @@ namespace Xiki
 
         private async void Clicked()
         {
-            page.setArticleView(articleID);
+            ArticlePage.SetArticleView(articleID);
             await Navigation.PopAsync();
         }
     }

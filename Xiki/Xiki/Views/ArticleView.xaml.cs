@@ -15,19 +15,16 @@ namespace Xiki.Views
 	{
 
         private int ArticleID;
-
-        private ArticlePage page; 
-
+        
         private StackLayout ArticleElements;
 
         private string Title;
         private Tab tab;
 
-        public ArticleView (ArticlePage page, Tab tab, int articleID)
+        public ArticleView (Tab tab, int articleID)
 		{
 			InitializeComponent ();
-
-            this.page = page;
+           
             this.tab = tab;
             Title = "";
 
@@ -81,8 +78,20 @@ namespace Xiki.Views
             this.Title = (string)article["title"];
             tab.SetArticleView(this);
 
+            (FindByName("PageTitle") as Label).Text = this.Title;
 
-            (FindByName("PageTitle") as Label).Text = (string)article["title"];
+
+
+            JArray tags = (JArray)article["tags"];
+
+            for(int i = 0; i < tags.Count; i++)
+            {
+                string tag = (string) ((JObject) tags[i])["name"];
+
+                (FindByName("Tags") as FlexLayout).Children.Add(new TagView(tag));
+            }
+
+    
 
             for (int i = 0; i < data.Count; i++)
             {
@@ -183,7 +192,7 @@ namespace Xiki.Views
                             TapGestureRecognizer tapListener = new TapGestureRecognizer();
                             tapListener.Tapped += (s, e) =>
                             {
-                                page.setArticleView(articleID);
+                                ArticlePage.SetArticleView(articleID);
                             };
                             span.GestureRecognizers.Add(tapListener);
 

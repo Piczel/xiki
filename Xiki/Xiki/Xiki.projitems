@@ -15,16 +15,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Article\Anchor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ArticleLinkItem.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\TagResultPage.xaml.cs">
+      <DependentUpon>TagResultPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Anchor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ArticleLinkItem.xaml.cs">
       <DependentUpon>ArticleLinkItem.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Article\ArticlePage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ArticlePage.xaml.cs">
       <DependentUpon>ArticlePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Find.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Find.xaml.cs">
       <DependentUpon>Find.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +54,10 @@
       <DependentUpon>ArticleView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Tab.xaml.cs">
       <DependentUpon>Tab.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -60,6 +68,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ClickableIcon.xaml.cs">
       <DependentUpon>ClickableIcon.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\TagView.xaml.cs">
+      <DependentUpon>TagView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\_old\MenuView.xaml.cs">
@@ -89,17 +101,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArticleLinkItem.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ArticleLinkItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Article\ArticlePage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\ArticlePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Find.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\Find.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -160,5 +172,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\_old\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\TagView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\TagResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

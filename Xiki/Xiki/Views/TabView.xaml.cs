@@ -15,15 +15,11 @@ namespace Xiki.Views
 
     public partial class TabView : ContentView
     {
-
-        private ArticlePage page;
-
         private Dictionary<int, Tab> openTabs = new Dictionary<int, Tab>();
         
-		public TabView (ArticlePage page)
+		public TabView ()
 		{
 			InitializeComponent ();
-            this.page = page; 
         }
 
         public ArticleView OpenTab (int articleID)
@@ -43,7 +39,7 @@ namespace Xiki.Views
                 tab = new Tab(this);
                 openTabs.Add(articleID, tab);
 
-                article = new ArticleView(page, tab, articleID);
+                article = new ArticleView(tab, articleID);
                 (FindByName("TabStash") as StackLayout).Children.Add(tab);
             }
 
@@ -71,7 +67,7 @@ namespace Xiki.Views
 
         public void TabClicked (Tab tab)
         {
-            page.setArticleView(tab);
+            ArticlePage.SetArticleView(tab);
         }
     }
 }

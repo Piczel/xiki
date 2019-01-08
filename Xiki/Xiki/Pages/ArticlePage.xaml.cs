@@ -16,13 +16,15 @@ namespace Xiki.Article
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ArticlePage : ContentPage
 	{
+        private static ArticlePage instance;
+
         private TabView tabs;
-		public ArticlePage (int articleID)
+		private ArticlePage ()
 		{
 			InitializeComponent();
-            tabs = new TabView(this);
+            tabs = new TabView();
             (FindByName("HorizontalStack") as StackLayout).Children.Add(tabs);
-            setArticleView(articleID);
+            //SetArticleView(articleID);
             
 
             IList<View> buttons = (FindByName("Buttons") as FlexLayout).Children;
@@ -70,28 +72,34 @@ namespace Xiki.Article
                 
             }));
             buttons.Add(new ClickableIcon("Find", () => {
-                Navigation.PushAsync(new Find(this));
+                Navigation.PushAsync(new Find());
             }));
             
             
 
             // DisplayAlert("Message", "Page loaded, ID: " + ArticleID, "OK");
         }
-        public void setArticleView (int articleID)
-        {
 
+        public static ArticlePage GetInstance()
+        {
+            if (instance == null)
+                instance = new ArticlePage();
+
+            return instance;
+        }
+        public static void SetArticleView (int articleID)
+        {
             // Creates a new view and loads its content
 
-            (FindByName("ArticleViewport") as ScrollView).Content = tabs.OpenTab(articleID);
+            (instance.FindByName("ArticleViewport") as ScrollView).Content = instance.tabs.OpenTab(articleID);
         }
         
-        public void setArticleView(Tab tab)
+        public static void SetArticleView(Tab tab)
         {
             // Sets the view from clicked tab
 
-
-            tabs.SetActive(tab);
-            (FindByName("ArticleViewport") as ScrollView).Content = tab.GetArticleView();
+            instance.tabs.SetActive(tab);
+            (instance.FindByName("ArticleViewport") as ScrollView).Content = tab.GetArticleView();
         }
       
     }
