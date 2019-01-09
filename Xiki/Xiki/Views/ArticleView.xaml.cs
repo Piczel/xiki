@@ -27,7 +27,6 @@ namespace Xiki.Views
            
             this.tab = tab;
             Title = "";
-
             this.ArticleID = articleID;
 
             ArticleElements = this.FindByName("ArticleContent") as StackLayout;
@@ -48,7 +47,7 @@ namespace Xiki.Views
                 {
                     wikiID = App.WikiID,
                     articleID = this.ArticleID
-                });
+            });
                 
                 JArray articles = (JArray)response["articles"];
 
@@ -57,9 +56,9 @@ namespace Xiki.Views
                     throw new Exception("Article not found");
                 }
 
-
-
                 LoadElements((JObject)articles[0]);
+
+                await ArticleElements.FadeTo(1, 1500);
 
             }
             catch (Exception exc)
@@ -70,18 +69,14 @@ namespace Xiki.Views
 
         private void LoadElements(JObject article)
         {
-
             
             JObject content = JObject.Parse((string)article["content"]);
             JArray data = (JArray)content["data"];
 
             this.Title = (string)article["title"];
             tab.SetArticleView(this);
-
             (FindByName("PageTitle") as Label).Text = this.Title;
-
-
-
+            
             JArray tags = (JArray)article["tags"];
 
             for(int i = 0; i < tags.Count; i++)
@@ -92,7 +87,6 @@ namespace Xiki.Views
             }
 
     
-
             for (int i = 0; i < data.Count; i++)
             {
                 JObject section = (JObject)data[i];
@@ -119,7 +113,7 @@ namespace Xiki.Views
             Label heading = new Label();
             heading.Style = Resources[(string)h["style"]] as Style;
             heading.Text = (string)h["text"];
-
+            
             ArticleElements.Children.Add(heading);
         }
 
@@ -127,7 +121,6 @@ namespace Xiki.Views
         {
             Label paragraph = ParseParagraphLabel((string)p["text"]);
             paragraph.Style = Resources[(string)p["style"]] as Style;
-
             ArticleElements.Children.Add(paragraph);
         }
 
@@ -135,7 +128,7 @@ namespace Xiki.Views
         {
             Label label = new Label();
             char[] chars = text.ToCharArray();
-
+          
             FormattedString str = new FormattedString();
 
             int start = 0;

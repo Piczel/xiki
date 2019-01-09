@@ -55,7 +55,7 @@
     </ContentView.Resources>
     <ContentView.Content>
   
-        <StackLayout x:Name="ArticleContent" Padding="16, 50, 16, 0" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout x:Name="ArticleContent" Padding="16, 50, 16, 0" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Opacity="0">
 
             <Label x:Name="PageTitle" Style="{StaticResource ArticleH1}" />
             <ScrollView VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Always" HorizontalOptions="FillAndExpand" >
