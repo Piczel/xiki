@@ -28,7 +28,7 @@ namespace Xiki.Article
             
 
             IList<View> buttons = (FindByName("Buttons") as FlexLayout).Children;
-            buttons.Add(new ClickableIcon("Menu", () => {
+            buttons.Add(new ClickableIcon(Views.Icon.MENU, "Menu", () => {
                 MenuPage menu = new MenuPage();
                 menu.AddItem(new NavItem("Settings", "Configure your app", delegate ()
                 {
@@ -68,10 +68,10 @@ namespace Xiki.Article
 
                 Navigation.PushAsync(menu);
             }));
-            buttons.Add(new ClickableIcon("Saved", () => {
+            buttons.Add(new ClickableIcon(Views.Icon.BOOKMARKS, "Saved", () => {
                 
             }));
-            buttons.Add(new ClickableIcon("Find", () => {
+            buttons.Add(new ClickableIcon(Views.Icon.SEARCH, "Find", () => {
                 Navigation.PushAsync(new Find());
             }));
             

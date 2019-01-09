@@ -171,6 +171,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Resources\drawable\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\_old\" />
   </ItemGroup>
   <ItemGroup>

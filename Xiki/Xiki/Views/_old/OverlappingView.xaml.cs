@@ -22,7 +22,7 @@ namespace Xiki.Views
 			InitializeComponent();
             
             IList<View> buttons = (FindByName("Buttons") as FlexLayout).Children;
-            buttons.Add(new ClickableIcon("Menu", () => {
+            buttons.Add(new ClickableIcon(Icon.MENU, "Menu", () => {
                 ToggleLayoutAsync(async delegate() {
 
                     MenuView menu = new MenuView();
@@ -34,12 +34,12 @@ namespace Xiki.Views
                     await SetContent(menu);
                 });
             }));
-            buttons.Add(new ClickableIcon("Saved", () => {
+            buttons.Add(new ClickableIcon(Icon.BOOKMARKS, "Saved", () => {
                 ToggleLayoutAsync(() => {
 
                 });
             }));
-            buttons.Add(new ClickableIcon("Find", () => {
+            buttons.Add(new ClickableIcon(Icon.SEARCH, "Find", () => {
                 ToggleLayoutAsync(() => {
 
                 });
