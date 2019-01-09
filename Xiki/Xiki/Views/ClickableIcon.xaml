@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Xiki.Views.ClickableIcon">
     <ContentView.Content>
-        <StackLayout Spacing="0" Padding="10, 0, 10, 0">
-            <BoxView HeightRequest="34" WidthRequest="34" BackgroundColor="Gainsboro"/>
+        <StackLayout Spacing="0" Padding="10, 0, 10, 0" x:Name="MainContent">
+            <Image x:Name="Image" HeightRequest="34" WidthRequest="34"/>
             <Label x:Name="IconLabel" TextColor="#464646" FontSize="10" HorizontalTextAlignment="Center"/>
         </StackLayout>
     </ContentView.Content>
