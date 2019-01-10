@@ -15,61 +15,79 @@ namespace Xiki.Views
 
     public partial class TabView : ContentView
     {
-        private Dictionary<int, Tab> openTabs = new Dictionary<int, Tab>();
-        
-		public TabView ()
+        private static TabView instance;
+        private static Dictionary<int, Tab> tabs = new Dictionary<int, Tab>();
+
+        public static TabView GetInstance()
+        {
+            if(instance == null)
+            {
+                instance = new TabView();
+            }
+
+            return instance;
+        }
+
+		private TabView ()
 		{
 			InitializeComponent ();
         }
 
-        public ArticleView OpenTab (int articleID)
+        public static async void OpenArticle (int articleID)
         {
-            // Opens a new tab
-
-            ArticleView article = null;
-            Tab tab = null;
-
-            if (openTabs.ContainsKey(articleID))
+            if(tabs.ContainsKey(articleID))
             {
-                tab = openTabs[articleID];
-            
-                article = tab.GetArticleView();
-            }
-            else
+                await SwitchToTab(tabs[articleID]);
+            } else
             {
-                tab = new Tab(this);
-                openTabs.Add(articleID, tab);
+                StackLayout tabStash = GetInstance().FindByName("TabStash") as StackLayout;
+                Tab tab = new Tab(articleID);
 
-                article = new ArticleView(tab, articleID);
-                (FindByName("TabStash") as StackLayout).Children.Add(tab);
+                tabStash.Children.Add(tab);
+                tabs.Add(articleID, tab);
+
+                await SwitchToTab(tab);
+
+                tab.SetTitle((await ArticleView.Get(articleID)).GetTitle());
             }
-
-            SetActive(tab);
-            article.FadeIn();
-            return article;
-
         }
 
 
-
-        public void SetActive(Tab tab)
+        private static void SetActive(Tab tab)
         {
-            // Opens existing tab
-            IList<View> tabs = (FindByName("TabStash") as StackLayout).Children;
+            IList<View> tabs = (GetInstance().FindByName("TabStash") as StackLayout).Children;
             for (int i=0;i<tabs.Count;i++)
             {
                 ((Tab) tabs[i]).SetInactive();
             }
 
             tab.SetActive();
-
         }
 
 
-        public async Task<bool> TabClicked (Tab tab)
+        public static async Task<bool> SwitchToTab (Tab tab)
         {
-            ArticlePage.SetArticleView(tab);
-            return await tab.GetArticleView().FadeIn(250);
+
+            ArticleView old = ArticlePage.GetArticleView();
+            if (old != null)
+            {
+                await old.FadeOut(50);
+            }
+
+            // Retrieve ArticleView from cache (or load new)
+            ArticleView article = await ArticleView.Get(tab.GetArticleID());
+            ArticlePage.SetArticleView(article);
+            SetActive(tab);
+            return await article.FadeIn(150);
+        }
+
+        public static async Task<bool> CloseTab (Tab tab)
+        {
+            StackLayout tabStash = GetInstance().FindByName("TabStash") as StackLayout;
+            tabStash.Children.Remove(tab);
+            tabs.Remove(tab.GetArticleID());
+
+            return await SwitchToTab((Tab)tabStash.Children.ElementAt(0)); // TO DO: pop navigation history
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xiki.Article;
+using Xiki.Views;
 
 namespace Xiki
 {
@@ -34,7 +35,7 @@ namespace Xiki
 
         private async void Clicked()
         {
-            ArticlePage.SetArticleView(articleID);
+            TabView.OpenArticle(articleID);
             await Navigation.PopAsync();
         }
     }

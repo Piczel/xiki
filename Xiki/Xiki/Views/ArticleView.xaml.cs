@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,25 +14,40 @@ namespace Xiki.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ArticleView : ContentView
 	{
+        private static Dictionary<int, ArticleView> Articles = new Dictionary<int, ArticleView>();
+
+        public static async Task<ArticleView> Get(int articleID, bool simlulateLoad = false)
+        {
+            if (Articles.ContainsKey(articleID))
+            {
+                if (simlulateLoad)
+                {
+                    Thread.Sleep(1000);
+                }
+                return Articles[articleID];
+            }
+            else
+            {
+                ArticleView article = new ArticleView(articleID);
+                Articles.Add(articleID, article);
+
+                return await article.LoadArticleAsync();
+            }
+        }
+
 
         private int ArticleID;
-        
         private StackLayout ArticleElements;
-
         private string Title;
-        private Tab tab;
 
-        public ArticleView (Tab tab, int articleID)
+        public ArticleView (int articleID)
 		{
 			InitializeComponent ();
            
-            this.tab = tab;
             Title = "";
             this.ArticleID = articleID;
 
-            ArticleElements = this.FindByName("ArticleContent") as StackLayout;
-
-            LoadArticleAsync();               
+            ArticleElements = this.FindByName("ArticleContent") as StackLayout;            
         }
 
         public string GetTitle()
@@ -49,7 +65,7 @@ namespace Xiki.Views
             return await ArticleElements.FadeTo(0, duration);
         }
 
-        private async void LoadArticleAsync()
+        private async Task<ArticleView> LoadArticleAsync()
         {
             try
             {
@@ -57,7 +73,7 @@ namespace Xiki.Views
                 {
                     wikiID = App.WikiID,
                     articleID = this.ArticleID
-            });
+                });
                 
                 JArray articles = (JArray)response["articles"];
 
@@ -72,8 +88,10 @@ namespace Xiki.Views
             }
             catch (Exception exc)
             {
-              /*  await DisplayAlert("Error!", exc.ToString(), "OK"); */
+                System.Diagnostics.Debug.WriteLine("Error: " + exc.ToString()); 
             }
+
+            return this;
         }
 
         private void LoadElements(JObject article)
@@ -83,7 +101,6 @@ namespace Xiki.Views
             JArray data = (JArray)content["data"];
 
             this.Title = (string)article["title"];
-            tab.SetArticleView(this);
             (FindByName("PageTitle") as Label).Text = this.Title;
             
             JArray tags = (JArray)article["tags"];
@@ -194,7 +211,7 @@ namespace Xiki.Views
                             TapGestureRecognizer tapListener = new TapGestureRecognizer();
                             tapListener.Tapped += (s, e) =>
                             {
-                                ArticlePage.SetArticleView(articleID);
+                                TabView.OpenArticle(articleID);
                             };
                             span.GestureRecognizers.Add(tapListener);
 
