@@ -22,7 +22,7 @@ namespace Xiki.Article
         private ArticlePage()
         {
             InitializeComponent();
-            tabs = new TabView();
+            tabs = TabView.GetInstance();
             (FindByName("HorizontalStack") as StackLayout).Children.Add(tabs);
             //SetArticleView(articleID);
 
@@ -91,24 +91,15 @@ namespace Xiki.Article
 
             return instance;
         }
-        public static async void SetArticleView(int articleID)
+
+        public static void SetArticleView(ArticleView article)
         {
-            // Creates a new view and loads its content (or finds cached)
-            ScrollView viewport = (instance.FindByName("ArticleViewport") as ScrollView);
-            if (viewport.Content != null)
-            {
-                await (viewport.Content as ArticleView).FadeOut();
-            }
-            viewport.Content = instance.tabs.OpenTab(articleID);
+            (GetInstance().FindByName("ArticleViewport") as ScrollView).Content = article;
         }
 
-        public static async void SetArticleView(Tab tab)
+        public static ArticleView GetArticleView()
         {
-            // Sets the view from clicked tab
-            instance.tabs.SetActive(tab);
-            await ((instance.FindByName("ArticleViewport") as ScrollView).Content as ArticleView).FadeOut(100);
-            (instance.FindByName("ArticleViewport") as ScrollView).Content = tab.GetArticleView();
+            return (GetInstance().FindByName("ArticleViewport") as ScrollView).Content as ArticleView;
         }
-
     }
 }
