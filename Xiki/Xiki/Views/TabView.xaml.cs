@@ -34,7 +34,8 @@ namespace Xiki.Views
                 tab = openTabs[articleID];
             
                 article = tab.GetArticleView();
-            } else
+            }
+            else
             {
                 tab = new Tab(this);
                 openTabs.Add(articleID, tab);
@@ -44,7 +45,7 @@ namespace Xiki.Views
             }
 
             SetActive(tab);
-
+            article.FadeIn();
             return article;
 
         }
@@ -65,9 +66,10 @@ namespace Xiki.Views
         }
 
 
-        public void TabClicked (Tab tab)
+        public async Task<bool> TabClicked (Tab tab)
         {
             ArticlePage.SetArticleView(tab);
+            return await tab.GetArticleView().FadeIn(250);
         }
     }
 }

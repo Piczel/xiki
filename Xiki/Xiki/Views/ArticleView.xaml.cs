@@ -39,6 +39,16 @@ namespace Xiki.Views
             return Title;        
         }
 
+        public async Task<bool> FadeIn(uint duration = 500)
+        {
+            return await ArticleElements.FadeTo(1, duration);
+        }
+
+        public async Task<bool> FadeOut(uint duration = 500)
+        {
+            return await ArticleElements.FadeTo(0, duration);
+        }
+
         private async void LoadArticleAsync()
         {
             try
@@ -57,8 +67,7 @@ namespace Xiki.Views
                 }
 
                 LoadElements((JObject)articles[0]);
-
-                await ArticleElements.FadeTo(1, 1500);
+                
 
             }
             catch (Exception exc)
