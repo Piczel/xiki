@@ -28,6 +28,9 @@
 
             </StackLayout>
 
+            <Image AbsoluteLayout.LayoutBounds="0, 0, 1, 60" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" Margin="0, 0, 16, 0" Source="gradient_top.png" Aspect="Fill"/>
+            <Image AbsoluteLayout.LayoutBounds="0, 1, 1, 100" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" Margin="0, 0, 16, 48" Source="gradient_bottom.png" Aspect="Fill"/>
+
             <FlexLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 38" Margin="0, 0, 16, 0" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" JustifyContent="SpaceBetween" HeightRequest="38" Direction="Row">
                 <StackLayout Spacing="1" Orientation="Horizontal">
                     <Image HeightRequest="38" WidthRequest="38" Source="{x:Static views:Icon.ARROW_LEFT}" />
@@ -40,7 +43,8 @@
             </FlexLayout>
 
             <FlexLayout AbsoluteLayout.LayoutBounds="0, 1, 1, 48" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" x:Name="Buttons" HeightRequest="48" JustifyContent="SpaceBetween"></FlexLayout>
-
+            
         </AbsoluteLayout>
+        
     </ContentPage.Content>
 </ContentPage>
