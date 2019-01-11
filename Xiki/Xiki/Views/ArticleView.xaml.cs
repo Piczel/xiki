@@ -31,6 +31,8 @@ namespace Xiki.Views
                 ArticleView article = new ArticleView(articleID);
                 Articles.Add(articleID, article);
 
+                //Insert loading animation, somewhere lmao not here though lol st00pid
+
                 return await article.LoadArticleAsync();
             }
         }

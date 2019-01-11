@@ -71,14 +71,14 @@ namespace Xiki.Views
             ArticleView old = ArticlePage.GetArticleView();
             if (old != null)
             {
-                await old.FadeOut(50);
+                await old.FadeOut(150);
             }
 
             // Retrieve ArticleView from cache (or load new)
             ArticleView article = await ArticleView.Get(tab.GetArticleID());
             ArticlePage.SetArticleView(article);
             SetActive(tab);
-            return await article.FadeIn(150);
+            return await article.FadeIn(250);
         }
 
         public static async Task<bool> CloseTab (Tab tab)
