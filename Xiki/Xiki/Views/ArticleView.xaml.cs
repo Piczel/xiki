@@ -42,6 +42,8 @@ namespace Xiki.Views
         private StackLayout ArticleElements;
         private string Title;
 
+        public double ScrollPos { get; set; }
+
         public ArticleView (int articleID)
 		{
 			InitializeComponent ();

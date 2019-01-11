@@ -94,7 +94,13 @@ namespace Xiki.Article
 
         public static void SetArticleView(ArticleView article)
         {
-            (GetInstance().FindByName("ArticleViewport") as ScrollView).Content = article;
+            ScrollView scroll = (GetInstance().FindByName("ArticleViewport") as ScrollView);
+            if (scroll.Content != null)
+            {
+                (scroll.Content as ArticleView).ScrollPos = scroll.ScrollY;
+            }
+            scroll.Content = article;
+            scroll.ScrollToAsync(0, article.ScrollPos, false);
         }
 
         public static ArticleView GetArticleView()
