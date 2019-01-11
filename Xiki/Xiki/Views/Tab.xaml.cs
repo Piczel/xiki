@@ -50,6 +50,31 @@ namespace Xiki.Views
             TabView.CloseTab(this);
         }
 
+        public async Task<bool> TransitionIn()
+        {
+            bool x = await ViewExtensions.LayoutTo(this, new Rectangle(this.Bounds.X, this.Bounds.Y, this.Bounds.Width, 120), 200, Easing.CubicInOut);
+            x |= await (FindByName("CloseButton") as Button).FadeTo(1, 50);
+            if (x || !x)
+            {
+                this.HeightRequest = 120;
+            }
+
+            return x;
+        }
+
+        public async Task<bool> TransitionOut()
+        {
+            (FindByName("TabName") as Label).FadeTo(0, 50);
+            bool x = await (FindByName("CloseButton") as Button).FadeTo(0, 50);
+            x |= await ViewExtensions.LayoutTo(this, new Rectangle(this.Bounds.X, this.Bounds.Y, this.Bounds.Width, 20), 150, Easing.CubicInOut);
+            if (x || !x)
+            {
+                this.HeightRequest = 20;
+            }
+
+            return x;
+        }
+
         public void SetActive()
         {
             this.BackgroundColor = Color.White;

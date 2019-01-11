@@ -45,6 +45,9 @@ namespace Xiki.Views
 
                 tabStash.Children.Add(tab);
                 tabs.Add(articleID, tab);
+                ScrollView scroll = (GetInstance().FindByName("Scroll") as ScrollView);
+                scroll.ScrollToAsync(0, scroll.ContentSize.Height - scroll.Height + 120, true);
+                tab.TransitionIn();
 
                 await SwitchToTab(tab);
 
@@ -84,10 +87,28 @@ namespace Xiki.Views
         public static async Task<bool> CloseTab (Tab tab)
         {
             StackLayout tabStash = GetInstance().FindByName("TabStash") as StackLayout;
+            await tab.TransitionOut();
             tabStash.Children.Remove(tab);
             tabs.Remove(tab.GetArticleID());
 
-            return await SwitchToTab((Tab)tabStash.Children.ElementAt(0)); // TO DO: pop navigation history
+            int count = tabStash.Children.Count;
+            if(count > 0)
+            {
+                // TO DO: pop navigation history
+                Tab switchTo = (Tab)tabStash.Children.ElementAt(count - 1);
+                return await SwitchToTab(switchTo); 
+            } else
+            {
+                ArticleView old = ArticlePage.GetArticleView();
+                if (old != null)
+                {
+                    return await old.FadeOut(150);
+                } else
+                {
+                    return false;
+                }
+            }
+
         }
     }
 }
