@@ -64,15 +64,7 @@ namespace Xiki.Views
 
         public async Task<bool> TransitionOut()
         {
-            (FindByName("TabName") as Label).FadeTo(0, 50);
-            bool x = await (FindByName("CloseButton") as Button).FadeTo(0, 50);
-            x |= await ViewExtensions.LayoutTo(this, new Rectangle(this.Bounds.X, this.Bounds.Y, this.Bounds.Width, 20), 150, Easing.CubicInOut);
-            if (x || !x)
-            {
-                this.HeightRequest = 20;
-            }
-
-            return x;
+            return await ViewExtensions.FadeTo(this, 0, 100);
         }
 
         public void SetActive()
