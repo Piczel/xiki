@@ -14,58 +14,57 @@ namespace Xiki.Views
     public partial class Tab : ContentView
 	{
     private TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
-
-
-        private ArticleView article;
         
-        private TabView tabView;
+        private int articleID;
 
-        public Tab (TabView tabView)
+        public Tab (int articleID)
 		{
 			InitializeComponent ();
+            this.articleID = articleID;
+
             tapGestureRecognizer.Tapped += (s, e) =>
             {
                  Clicked();
             };
 
-            this.tabView = tabView; 
-
             GestureRecognizers.Add(tapGestureRecognizer);
 
-            (FindByName("TabName") as Label).Text = "Untitled Tab";
+            (FindByName("TabName") as Label).Text = "";
             BackgroundColor = Color.Gainsboro;
 
         }
 
-        public void SetArticleView(ArticleView article)
+        public void SetTitle(string title)
         {
-            this.article = article;
-            (FindByName("TabName") as Label).Text = article.GetTitle();
+            (FindByName("TabName") as Label).Text = title;
         }
-        public ArticleView GetArticleView()
+
+        public int GetArticleID()
         {
-            return article;
+            return articleID;
         }
 
 
         private void DeletusFetus(object sender, EventArgs e)
         {
-            StackLayout tabs = tabView.FindByName("TabStash") as StackLayout;
-            
-            tabs.Children.Remove(this);
+            TabView.CloseTab(this);
+        }
 
-
-            try
+        public async Task<bool> TransitionIn()
+        {
+            bool x = await ViewExtensions.LayoutTo(this, new Rectangle(this.Bounds.X, this.Bounds.Y, this.Bounds.Width, 120), 200, Easing.CubicInOut);
+            x |= await (FindByName("CloseButton") as Button).FadeTo(1, 50);
+            if (x || !x)
             {
-                tabView.TabClicked(
-                    (Tab) tabs.Children.ElementAt(0)
-                );
-
-            } catch(ArgumentOutOfRangeException exc)
-            {
-                // All tabs closed
-
+                this.HeightRequest = 120;
             }
+
+            return x;
+        }
+
+        public async Task<bool> TransitionOut()
+        {
+            return await ViewExtensions.FadeTo(this, 0, 100);
         }
 
         public void SetActive()
@@ -80,7 +79,7 @@ namespace Xiki.Views
 
         private async void Clicked()
         {
-            tabView.TabClicked(this);
+            await TabView.SwitchToTab(this);
         }
 
 

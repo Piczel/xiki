@@ -5,7 +5,7 @@
              x:Class="Xiki.Views.TabView">
   <ContentView.Content>
 
-        <ScrollView WidthRequest="16" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" BackgroundColor="Gray">
+        <ScrollView x:Name="Scroll" WidthRequest="16" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" BackgroundColor="Gray">
             <StackLayout x:Name="TabStash" Spacing="2">
               
             </StackLayout>

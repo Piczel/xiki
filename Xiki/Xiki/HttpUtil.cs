@@ -20,7 +20,7 @@ namespace Xiki
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(App.Host); // 10.130.216.144
                 string json = JsonConvert.SerializeObject(data);
-
+                System.Diagnostics.Debug.WriteLine("JSON: " + json);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage result = await client.PostAsync(uri, content);
                 responseJSON = await result.Content.ReadAsStringAsync();

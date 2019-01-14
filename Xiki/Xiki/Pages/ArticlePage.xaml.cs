@@ -13,20 +13,23 @@ using Xiki.Views.Overlapping;
 
 namespace Xiki.Article
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ArticlePage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ArticlePage : ContentPage
+    {
+        private static ArticlePage instance;
+
         private TabView tabs;
-		public ArticlePage (int articleID)
-		{
-			InitializeComponent();
-            tabs = new TabView(this);
+        private ArticlePage()
+        {
+            InitializeComponent();
+            tabs = TabView.GetInstance();
             (FindByName("HorizontalStack") as StackLayout).Children.Add(tabs);
-            setArticleView(articleID);
-            
+            //SetArticleView(articleID);
+
 
             IList<View> buttons = (FindByName("Buttons") as FlexLayout).Children;
-            buttons.Add(new ClickableIcon("Menu", () => {
+            buttons.Add(new ClickableIcon(Views.Icon.MENU, "Menu", () =>
+            {
                 MenuPage menu = new MenuPage();
                 menu.AddItem(new NavItem("Settings", "Configure your app", delegate ()
                 {
@@ -36,7 +39,7 @@ namespace Xiki.Article
                         Navigation.PushModalAsync(new PromptPage(
                             "Set server IP",
                             App.Host,
-                            delegate(string input)
+                            delegate (string input)
                             {
                                 App.Host = input;
                             }
@@ -47,13 +50,14 @@ namespace Xiki.Article
                         Navigation.PushModalAsync(new PromptPage(
                             "Set wiki ID",
                             "" + App.WikiID,
-                            delegate(string input)
+                            delegate (string input)
                             {
                                 try
                                 {
                                     App.WikiID = int.Parse(input);
 
-                                } catch(FormatException exc)
+                                }
+                                catch (FormatException exc)
                                 {
                                     DisplayAlert("Error", "Not a valid integer", "OK");
                                 }
@@ -66,33 +70,42 @@ namespace Xiki.Article
 
                 Navigation.PushAsync(menu);
             }));
-            buttons.Add(new ClickableIcon("Saved", () => {
-                
+            buttons.Add(new ClickableIcon(Views.Icon.BOOKMARKS, "Saved", () =>
+            {
+
             }));
-            buttons.Add(new ClickableIcon("Find", () => {
-                Navigation.PushAsync(new Find(this));
+            buttons.Add(new ClickableIcon(Views.Icon.SEARCH, "Find", () =>
+            {
+                Navigation.PushAsync(new Find());
             }));
-            
-            
+
+
 
             // DisplayAlert("Message", "Page loaded, ID: " + ArticleID, "OK");
         }
-        public void setArticleView (int articleID)
+
+        public static ArticlePage GetInstance()
         {
+            if (instance == null)
+                instance = new ArticlePage();
 
-            // Creates a new view and loads its content
-
-            (FindByName("ArticleViewport") as ScrollView).Content = tabs.OpenTab(articleID);
+            return instance;
         }
-        
-        public void setArticleView(Tab tab)
+
+        public static void SetArticleView(ArticleView article)
         {
-            // Sets the view from clicked tab
-
-
-            tabs.SetActive(tab);
-            (FindByName("ArticleViewport") as ScrollView).Content = tab.GetArticleView();
+            ScrollView scroll = (GetInstance().FindByName("ArticleViewport") as ScrollView);
+            if (scroll.Content != null)
+            {
+                (scroll.Content as ArticleView).ScrollPos = scroll.ScrollY;
+            }
+            scroll.Content = article;
+            scroll.ScrollToAsync(0, article.ScrollPos, false);
         }
-      
+
+        public static ArticleView GetArticleView()
+        {
+            return (GetInstance().FindByName("ArticleViewport") as ScrollView).Content as ArticleView;
+        }
     }
 }

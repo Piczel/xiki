@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,29 +14,44 @@ namespace Xiki.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ArticleView : ContentView
 	{
+        private static Dictionary<int, ArticleView> Articles = new Dictionary<int, ArticleView>();
+
+        public static async Task<ArticleView> Get(int articleID, bool simlulateLoad = false)
+        {
+            if (Articles.ContainsKey(articleID))
+            {
+                if (simlulateLoad)
+                {
+                    Thread.Sleep(1000);
+                }
+                return Articles[articleID];
+            }
+            else
+            {
+                ArticleView article = new ArticleView(articleID);
+                Articles.Add(articleID, article);
+
+                //Insert loading animation, somewhere lmao not here though lol st00pid
+
+                return await article.LoadArticleAsync();
+            }
+        }
+
 
         private int ArticleID;
-
-        private ArticlePage page; 
-
         private StackLayout ArticleElements;
-
         private string Title;
-        private Tab tab;
 
-        public ArticleView (ArticlePage page, Tab tab, int articleID)
+        public double ScrollPos { get; set; }
+
+        public ArticleView (int articleID)
 		{
 			InitializeComponent ();
-
-            this.page = page;
-            this.tab = tab;
+           
             Title = "";
-
             this.ArticleID = articleID;
 
-            ArticleElements = this.FindByName("ArticleContent") as StackLayout;
-
-            LoadArticleAsync();               
+            ArticleElements = this.FindByName("ArticleContent") as StackLayout;            
         }
 
         public string GetTitle()
@@ -43,7 +59,17 @@ namespace Xiki.Views
             return Title;        
         }
 
-        private async void LoadArticleAsync()
+        public async Task<bool> FadeIn(uint duration = 500)
+        {
+            return await ArticleElements.FadeTo(1, duration);
+        }
+
+        public async Task<bool> FadeOut(uint duration = 500)
+        {
+            return await ArticleElements.FadeTo(0, duration);
+        }
+
+        private async Task<ArticleView> LoadArticleAsync()
         {
             try
             {
@@ -60,30 +86,37 @@ namespace Xiki.Views
                     throw new Exception("Article not found");
                 }
 
-
-
                 LoadElements((JObject)articles[0]);
+                
 
             }
             catch (Exception exc)
             {
-              /*  await DisplayAlert("Error!", exc.ToString(), "OK"); */
+                System.Diagnostics.Debug.WriteLine("Error: " + exc.ToString()); 
             }
+
+            return this;
         }
 
         private void LoadElements(JObject article)
         {
-
             
             JObject content = JObject.Parse((string)article["content"]);
             JArray data = (JArray)content["data"];
 
             this.Title = (string)article["title"];
-            tab.SetArticleView(this);
+            (FindByName("PageTitle") as Label).Text = this.Title;
+            
+            JArray tags = (JArray)article["tags"];
 
+            for(int i = 0; i < tags.Count; i++)
+            {
+                string tag = (string) ((JObject) tags[i])["name"];
 
-            (FindByName("PageTitle") as Label).Text = (string)article["title"];
+                (FindByName("Tags") as FlexLayout).Children.Add(new TagView(tag));
+            }
 
+    
             for (int i = 0; i < data.Count; i++)
             {
                 JObject section = (JObject)data[i];
@@ -110,7 +143,7 @@ namespace Xiki.Views
             Label heading = new Label();
             heading.Style = Resources[(string)h["style"]] as Style;
             heading.Text = (string)h["text"];
-
+            
             ArticleElements.Children.Add(heading);
         }
 
@@ -118,7 +151,6 @@ namespace Xiki.Views
         {
             Label paragraph = ParseParagraphLabel((string)p["text"]);
             paragraph.Style = Resources[(string)p["style"]] as Style;
-
             ArticleElements.Children.Add(paragraph);
         }
 
@@ -126,7 +158,7 @@ namespace Xiki.Views
         {
             Label label = new Label();
             char[] chars = text.ToCharArray();
-
+          
             FormattedString str = new FormattedString();
 
             int start = 0;
@@ -183,7 +215,7 @@ namespace Xiki.Views
                             TapGestureRecognizer tapListener = new TapGestureRecognizer();
                             tapListener.Tapped += (s, e) =>
                             {
-                                page.setArticleView(articleID);
+                                TabView.OpenArticle(articleID);
                             };
                             span.GestureRecognizers.Add(tapListener);
 

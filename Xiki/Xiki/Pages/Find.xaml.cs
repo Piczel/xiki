@@ -8,18 +8,26 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xiki.Article;
+using Xiki.Views;
 
 namespace Xiki
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Find : ContentPage
 	{
+        private ResultView resultView;
 
-        private ArticlePage page;
-		public Find (ArticlePage page)
+		public Find ()
 		{
             InitializeComponent();
-            this.page = page;
+
+            resultView = new ResultView();
+            resultView.Add(new Label
+            {
+                Text = "Search for articles",
+                HorizontalTextAlignment = TextAlignment.Center
+            });
+            (FindByName("MainLayout") as StackLayout).Children.Add(resultView);
 		}
 
         public async void SearchAsync(object sender, EventArgs e)
@@ -32,14 +40,12 @@ namespace Xiki
                     search = (FindByName("Search") as Entry).Text
                 });
 
-                StackLayout container = FindByName("Articles") as StackLayout;
-
-                container.Children.Clear();
+                resultView.Clear();
 
                 JArray articles = (JArray)response["articles"];
                 int count = articles.Count;
 
-                container.Children.Add(new Label
+                resultView.Add(new Label
                 {
                     Text =  count + " article(s) found",
                     HorizontalTextAlignment = TextAlignment.Center
@@ -51,8 +57,7 @@ namespace Xiki
 
                     string subtitle = "Subtitle"; // ((string)((JObject)((JArray)((JObject)article["content"])["data"])[0])["text"]).Substring(0, 20) + "...";
 
-                    container.Children.Add(new ArticleLinkItem(
-                        page,
+                    resultView.Add(new ArticleLinkItem(
                         (string) article["title"],
                         subtitle,
                         (int)article["articleID"]

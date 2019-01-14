@@ -3,18 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Xiki.Find">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:Name="MainLayout">
 
             <FlexLayout AlignItems="Center">
                 <Entry x:Name="Search" WidthRequest="10000" FlexLayout.Shrink="1"/>
                 <Button Clicked="SearchAsync" Text="Q" WidthRequest="45" FlexLayout.Shrink="0"/>
             </FlexLayout>
-            <ScrollView>
-                <StackLayout x:Name="Articles" VerticalOptions="Fill" HorizontalOptions="Fill">
-                    <Label Text="Search for articles" HorizontalTextAlignment="Center" />
-
-                </StackLayout>
-            </ScrollView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

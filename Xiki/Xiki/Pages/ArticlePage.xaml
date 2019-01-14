@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Xiki.Views"
+             x:Class="Xiki.Article.ArticlePage"
+             Title="Xiki" NavigationPage.HasNavigationBar="False">
+            
+    <ContentPage.Resources>
+      
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+
+            <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"  Spacing="0" Orientation="Vertical">
+
+                <StackLayout x:Name="HorizontalStack" Spacing="0" Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    
+                    <ScrollView x:Name="ArticleViewport" BackgroundColor="#FFFFFF" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                    </ScrollView>
+
+
+                    <!-- TabView is appended here -->
+                </StackLayout>
+
+                <BoxView HeightRequest="48" BackgroundColor="WhiteSmoke" />
+
+
+            </StackLayout>
+
+            <Image AbsoluteLayout.LayoutBounds="0, 0, 1, 60" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" Margin="0, 0, 16, 0" Source="gradient_top.png" Aspect="Fill"/>
+            <Image AbsoluteLayout.LayoutBounds="0, 1, 1, 100" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" Margin="0, 0, 16, 48" Source="gradient_bottom.png" Aspect="Fill"/>
+
+            <FlexLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 38" Margin="0, 0, 16, 0" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" JustifyContent="SpaceBetween" HeightRequest="38" Direction="Row">
+                <StackLayout Spacing="1" Orientation="Horizontal">
+                    <Image HeightRequest="38" WidthRequest="38" Source="{x:Static views:Icon.ARROW_LEFT}" />
+                    <Image HeightRequest="38" WidthRequest="38" Source="{x:Static views:Icon.ARROW_RIGHT}" />
+                </StackLayout>
+                <StackLayout Spacing="1" Orientation="Horizontal">
+                    <Image HeightRequest="38" WidthRequest="38" Source="{x:Static views:Icon.BOOKMARK_EMPTY}" />
+                    <Image HeightRequest="38" WidthRequest="38" Source="{x:Static views:Icon.EDIT}" />
+                </StackLayout>
+            </FlexLayout>
+
+            <FlexLayout AbsoluteLayout.LayoutBounds="0, 1, 1, 48" AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional" x:Name="Buttons" HeightRequest="48" JustifyContent="SpaceBetween"></FlexLayout>
+            
+        </AbsoluteLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
