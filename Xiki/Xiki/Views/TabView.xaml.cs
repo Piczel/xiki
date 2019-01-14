@@ -70,6 +70,7 @@ namespace Xiki.Views
 
         public static async Task<bool> SwitchToTab (Tab tab)
         {
+            SetActive(tab);
 
             ArticleView old = ArticlePage.GetArticleView();
             if (old != null)
@@ -80,7 +81,6 @@ namespace Xiki.Views
             // Retrieve ArticleView from cache (or load new)
             ArticleView article = await ArticleView.Get(tab.GetArticleID());
             ArticlePage.SetArticleView(article);
-            SetActive(tab);
             return await article.FadeIn(250);
         }
 
